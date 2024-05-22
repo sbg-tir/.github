@@ -15,6 +15,19 @@ The SBG-TIR data product algorithms include:
 - [Level 4 Elevated Temperature Features (L4 ETF)](https://github.com/sbg-tir/SBG-TIR-L3-ETF)
 - [Level 4 Volcanic Activity (L4 VA)](https://github.com/sbg-tir/SBG-TIR-L4-VA)
 
+## Evapotranspiration Models
+
+The evapotranspiration models for the level 3 and 4 ecosystem products are being developed in the [JPL-Evapotranspiration-Algorithms](https://github.com/JPL-Evapotranspiration-Algorithms) organization. These models include:
+- [Surface Temperature Initiated Closure (STIC)](https://github.com/JPL-Evapotranspiration-Algorithms/STIC)
+- [Breathing Earth System Simulator (BESS)](https://github.com/JPL-Evapotranspiration-Algorithms/BESS)
+- [Priestley Taylor Jet Propulsion Laboratory (PT-JPL)](https://github.com/JPL-Evapotranspiration-Algorithms/PT-JPL)
+- [Priestley Taylor Jet Propulsion Laboratory Soil Moisture (PT-JPL-SM)](https://github.com/JPL-Evapotranspiration-Algorithms/PT-JPL-SM)
+- [MOD16](https://github.com/JPL-Evapotranspiration-Algorithms/MOD16)
+
+## STARS Data Fusion System
+
+The STARS data fusion system supporting the auxiliary inputs for the ecosystem products is being developed in the [STARS-Data-Fusion](https://github.com/STARS-Data-Fusion) organization.
+
 ## SBG-VSWIR
 
 The algorithms for the visible shortwave infrared (VSWIR) component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization.
