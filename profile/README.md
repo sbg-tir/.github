@@ -22,7 +22,6 @@ The evapotranspiration models for the level 3 and 4 ecosystem products are being
 - [Breathing Earth System Simulator (BESS)](https://github.com/JPL-Evapotranspiration-Algorithms/BESS)
 - [Priestley Taylor Jet Propulsion Laboratory (PT-JPL)](https://github.com/JPL-Evapotranspiration-Algorithms/PT-JPL)
 - [Priestley Taylor Jet Propulsion Laboratory Soil Moisture (PT-JPL-SM)](https://github.com/JPL-Evapotranspiration-Algorithms/PT-JPL-SM)
-- [MOD16](https://github.com/JPL-Evapotranspiration-Algorithms/MOD16)
 
 ## STARS Data Fusion System
 
