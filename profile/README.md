@@ -13,7 +13,7 @@ The SBG-TIR data product algorithms include:
   - [Level 4 Water Use Efficiency (L4 WUE)](https://github.com/sbg-tir/SBG-TIR-L3-ET?tab=readme-ov-file#l4t-esi-and-wue-products)
 - [Level 3 Surface Mineralogy (L3 SM)](https://github.com/sbg-tir/SBG-TIR-L3-SM)
 - [Level 3 Elevated Temperature Features (L3 ETF)](https://github.com/sbg-tir/SBG-TIR-L3-ETF)
-  - [Level 4 Volcanic Activity (L4 VA)](https://github.com/sbg-tir/SBG-TIR-L4-VA)
+- [Level 4 Volcanic Activity (L4 VA)](https://github.com/sbg-tir/SBG-TIR-L4-VA)
 
 ## Evapotranspiration Models
 
