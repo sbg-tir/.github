@@ -2,6 +2,20 @@
 
 This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor.
 
+NASA's SBG mission was a Designated Observable (DO) identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. The Decadal Survey document presented a clear vision for the combined roles of visible to shortwave infrared imaging spectroscopy and multispectral or hyperspectral thermal infrared image data in addressing terrestrial and aquatic ecosystems and other elements of biodiversity, geology, natural hazards, the water cycle, and applied sciences topics relevant to many areas with societal benefits. 
+
+The SBG-TIR portion of the mission develops the TIR multispectral instrument. The SBG-TIR instrument measures the emitted radiance of the Earth surface and uses that information to better understand the dynamics of Earth's changing surface geology and biology, ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass. The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. Descriptions of partner products are covered in separate documents.
+
+| **Areas** | **Product** | **ShortName** | 
+| --- | --- | --- |
+| Fundamental (Level 1) | Radiance at Sensor | RAS |
+| Fundamental | Surface Temperature and Emissivity | LSTE (incl WT, ST, and SGC) |
+| Fundamental | Cloud mask | CM |
+| Plant Functional Traits Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI |
+| Geology Suite | Surface Minerology (TIR only)<br> Elevated Technical Features<br> Volcanic Activity | SM<br> ETF<br> VA |
+| Snow Physics Suite | Snow Temperature (Use fundamental LST&E) | --- |
+| Aquatics Biology/Biogeochemistry Suite | Water Temperature (Use fundamental LST&E) | --- |
+
 ## SBG-TIR Data Product Algorithms
 
 The SBG-TIR data product algorithms include:
