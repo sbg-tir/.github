@@ -4,14 +4,14 @@ This organization contains the data product algorithms for the Surface Biology a
 
 NASA's SBG mission was a Designated Observable (DO) identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. The Decadal Survey document presented a clear vision for the combined roles of visible to shortwave infrared imaging spectroscopy and multispectral or hyperspectral thermal infrared image data in addressing terrestrial and aquatic ecosystems and other elements of biodiversity, geology, natural hazards, the water cycle, and applied sciences topics relevant to many areas with societal benefits. 
 
-The SBG-TIR portion of the mission develops the TIR multispectral instrument. The SBG-TIR instrument measures the emitted radiance of the Earth surface and uses that information to better understand the dynamics of Earth's changing surface geology and biology, ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass. The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. Descriptions of partner products are covered in separate documents.
+The Surface Biology and Geology (SBG) thermal infrared (TIR) instrument – termed the Observing Terrestrial Thermal Emission Radiometer (OTTER) consists of a TIR multispectral scanner with six spectral bands operating between 8.0 and 13.0 µm and two mid-infrared (MIR) bands between 3.0 and 5.0 µm, with a 60 m pixel resolution, an equatorial three day revisit. The SBG-TIR instrument measures the emitted radiance of the Earth surface and uses that information to better understand the dynamics of Earth's changing surface geology and biology, ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass. The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. 
 
-| **Areas** | **Product** | **ShortName** | 
-| --- | --- | --- |
-| Fundamental (Level 1) | Radiance at Sensor | RAS |
+| **Areas** | **Product** | **ShortName** | **NetCDF-4** | **GeoTIFF** | 
+| --- | --- | --- | --- | --- |
+| Fundamental (Level 1) | Radiance at Sensor | RAS | sw | X |  |
 | Fundamental | Surface Temperature and Emissivity | LSTE (incl WT, ST, and SGC) |
-| Fundamental | Cloud mask | CM |
-| Plant Functional Traits Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI |
+| Fundamental | Cloud mask<br> Water mask | CM<br> WM |
+| Ecosystems Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI |
 | Geology Suite | Surface Minerology (TIR only)<br> Elevated Technical Features<br> Volcanic Activity | SM<br> ETF<br> VA |
 | Snow Physics Suite | Snow Temperature (Use fundamental LST&E) | --- |
 | Aquatics Biology/Biogeochemistry Suite | Water Temperature (Use fundamental LST&E) | --- |
@@ -55,6 +55,40 @@ There are several supporting sub-components in generalized Julia packages, inclu
 
 The algorithms for the visible shortwave infrared (VSWIR) component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization.
 
+## Product File Name Format
+
+Product file names will have the form (TBD):
+<SBG_Name>_<PROD_TYPE>_<OOOOO>_<SSS>_<YYYYMMDD>T<hhmmss>_<BBbb>_<VV>.<TYPE>
+
+Where:
+SBG_Name: SBG-TIR name designation (TBD)
+PROD_TYPE:  L1A/L1B products; Example=L1B_RAD
+OOOOO:  Orbit number; starting at start of mission, ascending equatorial crossing
+SSS:  Scene ID; starting at first scene of each orbit
+YYYYMMDD:  Year, month, day of scene start time
+hhmmss:  Hour, minute, second of scene start time
+BBbb:  Build ID of software that generated product, Major+Minor (2+2 digits)
+VV:  Product version number (2 digits)
+TYPE:  File type extension=
+nc or tif for the data file
+nc.met or tif.met for the metadata file.
+
+## Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products 
+
+To provide an analysis-ready format, the SBG products are distributed in a tiled form and using the COG format. The tiled products include the letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling system used for SBG is borrowed from the modified Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles divide the Universal Transverse Mercator (UTM) zones into square tiles 109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830 columns in each tile, totaling 3.35 million pixels per tile. This allows the end user to assume that each 60 m SBG pixel will remain in the same location at each timestep observed in analysis. The COG format also facilitates end-user analysis as a universally recognized and supported format, compatible with open-source software, including QGIS, ArcGIS, GDAL, the Raster package in R, `rioxarray` in Python, and `Rasters.jl` in Julia.
+
+Each `float32` data layer occupies 4 bytes of storage per pixel, which amounts to an uncompressed size of 13.4 mb for each tiled data layer. The `uint8` quality flag layers occupy a single byte per pixel, which amounts to an uncompressed size of 3.35 mb per tiled data quality layer.
+
+Each `.tif` COG data layer in each L2T/L3T/L4T product additionally contains a rendered browse image in GeoJPEG format with a `.jpeg` extension. This image format is universally recognized and supported, and these files are compatible with Google Earth. Each L2T/L3T/L4T tile granule includes a `.json` file containing the Product Metadata and Standard Metadata in JSON format.
+
+### Quality Flags
+
+Two high-level quality flags are provided in all gridded and tiled products as thematic/binary masks encoded to zero and one in unsigned 8-bit integer layers. The cloud layer represents the final cloud test from L2 CLOUD. The water layer represents the surface water body in the Shuttle Radar Topography Mission (SRTM) Digital Elevation Model. For both layers, zero means absence, and one means presence. Pixels with the value 1 in the cloud layer represent detection of cloud in that pixel. Pixels with the value 1 in the water layer represent open water surface in that pixel. All tiled product data layers written in `float32` contain a standard not-a-number (`NaN`) value at each pixel that could not be retrieved. The cloud and water layers are provided to explain these missing values.
+
+
+### Swath Standard Metadata (NetCDF-4)
+
+Each SBG swath product in NetCDF format will contain at least 3 groups of data:  A standard metadata group that specifies the same type of contents for all products, a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data, and the group(s) containing the product data.  
 
 ## Standard Metadata
 
@@ -124,6 +158,7 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | CONUS	| Continental United States |
 | COTS	| Commercial Off The Shelf |
 | DAAC	| Distributed Active Archive Center |
+| BOA | Bottom of Atmosphere
 | dB	| DeciBel |
 | DCN	| Document Change Notice |
 | deg	| Degrees |
@@ -217,7 +252,7 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | Tb	| Brightness Temperature |
 | TBD	| To Be Determined |
 | TBS	| To Be Specified |
-| TOA	| Time of Arrival |
+| TOA	| Top of Atmosphere |
 | TPS	| Third Party Software |
 | USDA	| United State Department of Agriculture |
 | USGS	| United States Geological Society |
