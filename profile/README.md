@@ -40,3 +40,173 @@ There are several supporting sub-components in generalized Julia packages, inclu
 ## SBG-VSWIR
 
 The algorithms for the visible shortwave infrared (VSWIR) component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization.
+
+
+## Standard Metadata
+
+| **Name** | **Type** | **Size** | **Example** |
+| --- | --- | --- | --- |
+| AncillaryInputPointer | String | variable | Group name of ancillary file list | 
+| AutomaticQualityFlag | String | variable | PASS/FAIL (of product data) |
+| BuildId | String | variable | |
+| CollectionLabel | String | variable | |
+| DataFormatType | String | variable | NCSAHDF5 |
+| DayNightFlag | String | variable | |
+| EastBoundingCoordinate | LongFloat | 8 | |
+| HDFVersionId | String | variable | 1.8.16 |
+| ImageLines | Int32 | 4 | 5632 |
+| ImageLineSpacing | Float32 | 4 | 68.754 | 
+| ImagePixels | Int32 | 4 | 5400 |
+| ImagePixelSpacing | Float32 | 4 | 65.536 |
+| InputPointer | String | variable | |
+| InstrumentShortName | String | variable | SBG |
+| LocalGranuleID | String | variable | --- |
+| LongName | String | variable | SBG |
+| InstrumentShortName | String | variable | --- |
+| LocalGranuleID | String | variable | --- |
+| LongName | String | variable | SBG |
+| NorthBoundingCoordinate | LongFloat | 8 | --- |
+| PGEName | String | variable | L2_LSTE (L2_CLOUD) |
+| PGEVersion | String | variable | |
+| PlatformLongName | String | variable | |
+| PlatformShortName | String | variable | |
+| PlatformType | String | variable | Spacecraft |
+| ProcessingLevelID | String | variable | 1 |
+| ProcessingLevelDescription | String | variable | Level 2 Land Surface Temperatures and Emissivity (Level 2 Cloud mask) |
+| ProducerAgency | String | variable | JPL |
+| ProducerInstitution | String | variable | Caltech |
+| ProductionDateTime | String | variable | |
+| ProductionLocation | String | variable | |
+| CampaignShortName | String | variable | Primary |
+| RangeBeginningDate | String | variable | |
+| CampaignShortName | String | variable | |
+| RangeBeginningDate | String | variable | |
+| RangeBeginningTime | String | variable | |
+| RangeEndingDate | String | variable | |
+| RangeEndingTime | String | variable | |
+| SceneID | String | variable | |
+| ShortName | String | variable | L2_LSTE (L2_CLOUD) |
+| SceneID | String | variable | |
+| ShortName | String | variable | |
+| SISName | String | variable | |
+| SISVersion | String | variable | |
+| SouthBoundingCoordinate | LongFloat | 8 | |
+| StartOrbitNumber | String | variable | |
+| StartOrbitNumber | String | variable | |
+| WestBoundingCoordinate | LongFloat | 8 | |
+
+## Appendix of Abbreviations and Acronyms
+
+| **Abbreviatios** | **Description** |
+| --- | --- |
+| ALEXI	| Atmospheric-Land Exchange Inversion |
+| ARS	| Agricultural Research Service |
+| ASD	| Algorithm Specifications Document |
+| ATBD	| Algorithm Theoretical Basis Document |
+| CCB	| Change Control Board |
+| CDR	| Critical Design Review |
+| CF	| Climate and Forecast (metadata convention) |
+| CM	| Configuration Management |
+| CONUS	| Continental United States |
+| COTS	| Commercial Off The Shelf |
+| DAAC	| Distributed Active Archive Center |
+| dB	| DeciBel |
+| DCN	| Document Change Notice |
+| deg	| Degrees |
+| deg/sec	| Degrees per Second |
+| DEM	| Digital Elevation Model |
+| DisALEXI	| ALEXI Disaggregation algorithm |
+| DN	| Data Number |
+| EASE	| Equal Area Scalable Earth |
+| ECI	| Earth Centered Inertial coordinate system |
+| ECR	| Earth Centered Rotating coordinate system |
+| ECS	| EOSDIS Core System |
+| SBG	| ECOsystem Spaceborne Thermal Radiometer on Space Station |
+| EOS	| Earth Observing System |
+| EOSDIS	| EOS Data and Information System |
+| ESDIS	| Earth Science Data and Information System |
+| ESDT	| Earth Science Data Type |
+| FOV	| Field of View |
+| FSW	| Flight Software |
+| GB	| gigabytes, 109 bytes |
+| GDS	| Ground Data System |
+| GHA	| Greenwich Hour Angle |
+| GHz	| Gigahertz, 109 hertz |
+| GMAO	| Global Modeling and Assimilation Office |
+| GMT	| Greenwich Mean Time |
+| GPP	| Gross Primary Production |
+| GSE	| Ground Support Equipment |
+| GSFC	| Goddard Space Flight Center |
+| HDF	| Hierarchical Data Format |
+| HK	| Housekeeping (telemetry) |
+| HRSL	| Hydrology and Remote Sensing Laboratory |
+| Hz	| Hertz |
+| HSD	| Health and Status Data |
+| I&T	| Integration and Test |
+| ICD	| Interface Control Document |
+| I/O	| Input/Output |
+| IOC	| In-Orbit Checkout |
+| IPA	| Inter-Project Agreement |
+| ITAR	| International Traffic in Arms Regulation |
+| JPL	| Jet Propulsion Laboratory |
+| K	| Kelvin |
+| KHz	| Kilohertz |
+| Km	| kilometer, 1000 meters |
+| L0 – L4	| Level 0 through Level 4 |
+| LAN	| Local Area Network |
+| LEO	| Low Earth Orbit |
+| LOE	| Level of Effort |
+| LOM	| Life of Mission |
+| LP	| Land Processes |
+| LSTE	| Land Surface Temperature and Emissivity |
+| m	| meter |
+| MB	| megabytes, 106 bytes |
+| Mbps	| Mega bits per second |
+| MHz	| Megahertz |
+| MMR	| Monthly Management Review |
+| MOA	| Memorandum of Agreement |
+| MODIS	| Moderate Resolution Imaging Spectroradiometer |
+| MOS	| Mission Operations System |
+| m/s	| meters per second |
+| ms	| milliseconds |
+| MS	| Mission System |
+| NASA	| National Aeronautics and Space Administration  |
+| NCEP	| National Centers for Environmental Protection |
+| NCSA	| National Center for Supercomputing Applications |
+| netCDF	| Network Common Data Format |
+| NISN	| NASA Integrated Services Network |
+| NOAA	| National Oceanic and Atmospheric Administration |
+| OA	| Operations Agreement |
+| ODL	| Object Description Language |
+| OODT	| Object Oriented Data Technology |
+| ORR	| Operational Readiness Review |
+| ORT	| Operational Readiness Test |
+| PDR	| Preliminary Design Review |
+| percent	% | parts per hundred |
+| PR	| Problem Report |
+| PSD	| Product Specifications Document |
+| PT-JPL	| Priestly-Taylor-JPL |
+| PT-JPL-SM | Priestly-Taylor-JPL-Soil Moisutre |
+| QA	| Quality Assurance |
+| rad	| radians |
+| RDD	| Release Description Document |
+| RFA	| Request For Action |
+| S/C	| Spacecraft |
+| SCP	| Secure Copy |
+| SDP	| Software Development Plan |
+| SDS	| Science Data System |
+| sec, s	| seconds |
+| SITP	| System Integration and Test Plan |
+| SMP	| Software Management Plan |
+| SOM	| Software Operators Manual |
+| TAI	| International Atomic Clock |
+| Tb	| Brightness Temperature |
+| TBD	| To Be Determined |
+| TBS	| To Be Specified |
+| TOA	| Time of Arrival |
+| TPS	| Third Party Software |
+| USDA	| United State Department of Agriculture |
+| USGS	| United States Geological Society |
+| UTC	| Coordinated Universal Time |
+| V&V	| Verification and Validation |
+| XML	| Extensible Markup Language |
