@@ -73,7 +73,16 @@ TYPE:  File type extension=
 nc or tif for the data file
 nc.met or tif.met for the metadata file.
 
-## Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products 
+## Data Product Format
+
+### Swath Standard Metadata (NetCDF-4)
+
+The SBG-TIR instrument operates as a push-whisk scanner, collecting 256 pixels in the cross-whisk direction for each spectral channel, which enables a wide swath and high spatial resolution. As the platform moves forward, the scan mirror sweeps the focal plane ground projection in the cross-track direction. The different spectral bands are swept across a given point on the ground sequentially. From the 665 km (TBD) altitude, the resulting swath is 935 km (TBD) wide. A conceptual layout for the instrument is shown in Figure 3 1. The scan mirror rotates at a constant angular speed. It sweeps the focal plane image 68.8 (TBD) across nadir. 
+
+Each SBG swath product in NetCDF format will contain at least 3 groups of data:  A standard metadata group that specifies the same type of contents for all products, a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data, and the group(s) containing the product data.  
+
+
+### Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products 
 
 To provide an analysis-ready format, the SBG products are distributed in a tiled form and using the COG format. The tiled products include the letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling system used for SBG is borrowed from the modified Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles divide the Universal Transverse Mercator (UTM) zones into square tiles 109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830 columns in each tile, totaling 3.35 million pixels per tile. This allows the end user to assume that each 60 m SBG pixel will remain in the same location at each timestep observed in analysis. The COG format also facilitates end-user analysis as a universally recognized and supported format, compatible with open-source software, including QGIS, ArcGIS, GDAL, the Raster package in R, `rioxarray` in Python, and `Rasters.jl` in Julia.
 
@@ -81,16 +90,11 @@ Each `float32` data layer occupies 4 bytes of storage per pixel, which amounts t
 
 Each `.tif` COG data layer in each L2T/L3T/L4T product additionally contains a rendered browse image in GeoJPEG format with a `.jpeg` extension. This image format is universally recognized and supported, and these files are compatible with Google Earth. Each L2T/L3T/L4T tile granule includes a `.json` file containing the Product Metadata and Standard Metadata in JSON format.
 
-### Quality Flags
+#### Quality Flags
 
 Two high-level quality flags are provided in all gridded and tiled products as thematic/binary masks encoded to zero and one in unsigned 8-bit integer layers. The cloud layer represents the final cloud test from L2 CLOUD. The water layer represents the surface water body in the Shuttle Radar Topography Mission (SRTM) Digital Elevation Model. For both layers, zero means absence, and one means presence. Pixels with the value 1 in the cloud layer represent detection of cloud in that pixel. Pixels with the value 1 in the water layer represent open water surface in that pixel. All tiled product data layers written in `float32` contain a standard not-a-number (`NaN`) value at each pixel that could not be retrieved. The cloud and water layers are provided to explain these missing values.
 
-
-### Swath Standard Metadata (NetCDF-4)
-
-Each SBG swath product in NetCDF format will contain at least 3 groups of data:  A standard metadata group that specifies the same type of contents for all products, a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data, and the group(s) containing the product data.  
-
-## Standard Metadata
+## Standard Metadata 
 
 | **Name** | **Type** | **Size** | **Example** |
 | --- | --- | --- | --- |
@@ -151,6 +155,7 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 | ARS	| Agricultural Research Service |
 | ASD	| Algorithm Specifications Document |
 | ATBD	| Algorithm Theoretical Basis Document |
+| C | Celsius |
 | CCB	| Change Control Board |
 | CDR	| Critical Design Review |
 | CF	| Climate and Forecast (metadata convention) |
@@ -170,7 +175,6 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 | ECI	| Earth Centered Inertial coordinate system |
 | ECR	| Earth Centered Rotating coordinate system |
 | ECS	| EOSDIS Core System |
-| SBG	| ECOsystem Spaceborne Thermal Radiometer on Space Station |
 | EOS	| Earth Observing System |
 | EOSDIS	| EOS Data and Information System |
 | ESDIS	| Earth Science Data and Information System |
@@ -180,7 +184,7 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 | GB	| gigabytes, 109 bytes |
 | GDS	| Ground Data System |
 | GHA	| Greenwich Hour Angle |
-| GHz	| Gigahertz, 109 hertz |
+| GHz	| Gigahertz, $$\text{10}^9$$ hertz |
 | GMAO	| Global Modeling and Assimilation Office |
 | GMT	| Greenwich Mean Time |
 | GPP	| Gross Primary Production |
@@ -200,7 +204,7 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 | JPL	| Jet Propulsion Laboratory |
 | K	| Kelvin |
 | KHz	| Kilohertz |
-| Km	| kilometer, 1000 meters |
+| Km	| Kilometer, 1000 meters |
 | L0 – L4	| Level 0 through Level 4 |
 | LAN	| Local Area Network |
 | LEO	| Low Earth Orbit |
@@ -208,16 +212,16 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 | LOM	| Life of Mission |
 | LP	| Land Processes |
 | LSTE	| Land Surface Temperature and Emissivity |
-| m	| meter |
-| MB	| megabytes, 106 bytes |
+| m	| Meter |
+| MB	| Megabytes, 106 bytes |
 | Mbps	| Mega bits per second |
 | MHz	| Megahertz |
 | MMR	| Monthly Management Review |
 | MOA	| Memorandum of Agreement |
 | MODIS	| Moderate Resolution Imaging Spectroradiometer |
 | MOS	| Mission Operations System |
-| m/s	| meters per second |
-| ms	| milliseconds |
+| m/s	| Meters per second |
+| ms	| Milliseconds |
 | MS	| Mission System |
 | NASA	| National Aeronautics and Space Administration  |
 | NCEP	| National Centers for Environmental Protection |
@@ -231,7 +235,7 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 | ORR	| Operational Readiness Review |
 | ORT	| Operational Readiness Test |
 | PDR	| Preliminary Design Review |
-| percent	% | parts per hundred |
+| percent	% | Parts per hundred |
 | PR	| Problem Report |
 | PSD	| Product Specifications Document |
 | PT-JPL	| Priestly-Taylor-JPL |
@@ -240,11 +244,12 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 | rad	| radians |
 | RDD	| Release Description Document |
 | RFA	| Request For Action |
+| SBG	| ECOsystem Spaceborne Thermal Radiometer on Space Station |
 | S/C	| Spacecraft |
 | SCP	| Secure Copy |
 | SDP	| Software Development Plan |
 | SDS	| Science Data System |
-| sec, s	| seconds |
+| sec, s	| Seconds |
 | SITP	| System Integration and Test Plan |
 | SMP	| Software Management Plan |
 | SOM	| Software Operators Manual |
