@@ -1,10 +1,14 @@
 # Surface Biology and Geology (SBG) OTTER Thermal Infrared Data Product Algorithms
 
-This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor.
+## Background
+This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor. 
 
-NASA's SBG mission was a Designated Observable (DO) identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. The Decadal Survey document presented a clear vision for the combined roles of visible to shortwave infrared imaging spectroscopy and multispectral or hyperspectral thermal infrared image data in addressing terrestrial and aquatic ecosystems and other elements of biodiversity, geology, natural hazards, the water cycle, and applied sciences topics relevant to many areas with societal benefits. 
+The SBG mission has been divided into two separate satellite platforms, supporting 1) visible shortwave infrared (VSWIR) collections, and 2) multispectral thermal (TIR) collections. The algorithms for the VSWIR component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization. 
 
-The Surface Biology and Geology (SBG) thermal infrared (TIR) instrument – termed the Observing Terrestrial Thermal Emission Radiometer (OTTER) consists of a TIR multispectral scanner with six spectral bands operating between 8.0 and 13.0 µm and two mid-infrared (MIR) bands between 3.0 and 5.0 µm, with a 60 m pixel resolution, an equatorial three day revisit. The SBG-TIR instrument measures the emitted radiance of the Earth surface and uses that information to better understand the dynamics of Earth's changing surface geology and biology, ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass. The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. 
+The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. 
+
+The OTTER instrument consists of six spectral and two mid infrared bands with 60-m resolution and ~3 day revisit. OTTER will measure the emitted radiance of the Earth surface to better understand the dynamics of Earth’s changing surface geology and biology, focusing on ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass; directly addressing the topics of interest identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. 
+
 
 | **Areas** | **Product** | **ShortName** | **NetCDF-4** | **GeoTIFF** | 
 | --- | --- | --- | --- | --- |
@@ -15,6 +19,19 @@ The Surface Biology and Geology (SBG) thermal infrared (TIR) instrument – term
 | Geology Suite | Surface Minerology (TIR only)<br> Elevated Technical Features<br> Volcanic Activity | SM<br> ETF<br> VA |
 | Snow Physics Suite | Snow Temperature (Use fundamental LST&E) | --- |
 | Aquatics Biology/Biogeochemistry Suite | Water Temperature (Use fundamental LST&E) | --- |
+*Table 1. SBG-TIR products*
+
+| **Band** | **Center Wavelength Position**  | **Spectral Width** |
+| --- | --- | --- | 
+| MIR-1 | 3.98 | 20 | 
+| MIR-2 | 4.8 | 150 | 
+| TIR-1 | 8.32 | 300 | 
+| TIR-2 | 8.63 | 300 | 
+| TIR-3 | 9.07 | 300 | 
+| TIR-4 | 10.30 | 300 | 
+| TIR-5 | 11.35 | 500 | 
+| TIR-6 | 12.05 | 500 | 
+*Table 2. SBG-TIR band center wavelength positions*
 
 ## SBG-TIR Data Product Algorithms
 
@@ -51,9 +68,6 @@ There are several supporting sub-components in generalized Julia packages, inclu
 - [HLS.jl](https://github.com/STARS-Data-Fusion/HLS.jl) for searching and downloading the Harmonized Landsat Sentinel (HLS) dataset
 - [VNP43NRT.jl](https://github.com/STARS-Data-Fusion/VNP43NRT.jl) for Bidirectional Reflectance Distribution Function (BRDF)
 
-## SBG-VSWIR
-
-The algorithms for the visible shortwave infrared (VSWIR) component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization.
 
 ## Product File Name Format
 
@@ -77,10 +91,9 @@ nc.met or tif.met for the metadata file.
 
 ### Swath Standard Metadata (NetCDF-4)
 
-The SBG-TIR instrument operates as a push-whisk scanner, collecting 256 pixels in the cross-whisk direction for each spectral channel, which enables a wide swath and high spatial resolution. As the platform moves forward, the scan mirror sweeps the focal plane ground projection in the cross-track direction. The different spectral bands are swept across a given point on the ground sequentially. From the 665 km (TBD) altitude, the resulting swath is 935 km (TBD) wide. A conceptual layout for the instrument is shown in Figure 3 1. The scan mirror rotates at a constant angular speed. It sweeps the focal plane image 68.8 (TBD) across nadir. 
+The Network Common Data Form 4 (NetCDF-4) format will be used to distribute SBG granules at the orbit/scene level. These product files have a .nc file extension and are internally organized using the NetCDF-4 data standard. The NetCDF-4 format is utilized here for long-term archiving, and is not recommended for end-user analysis. These NetCDF-4 files are compatible with NetCDF Viewer, Panoply, and the NetCDF4 package in Python.
 
 Each SBG swath product in NetCDF format will contain at least 3 groups of data:  A standard metadata group that specifies the same type of contents for all products, a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data, and the group(s) containing the product data.  
-
 
 ### Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products 
 
@@ -147,6 +160,9 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | StartOrbitNumber | String | variable | |
 | WestBoundingCoordinate | LongFloat | 8 | |
 
+*Table 3. Standard metadata included in SBG-TIR product files*
+
+
 ## Appendix of Abbreviations and Acronyms
 
 | **Abbreviatios** | **Description** |
@@ -155,6 +171,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | ARS	| Agricultural Research Service |
 | ASD	| Algorithm Specifications Document |
 | ATBD	| Algorithm Theoretical Basis Document |
+| BESS | Breathing Earth System Simulator |
 | C | Celsius |
 | CCB	| Change Control Board |
 | CDR	| Critical Design Review |
@@ -184,7 +201,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | GB	| gigabytes, 109 bytes |
 | GDS	| Ground Data System |
 | GHA	| Greenwich Hour Angle |
-| GHz	| Gigahertz, $$\text{10}^9$$ hertz |
+| GHz	| $$\text{Gigahertz, 10}^9$$ hertz |
 | GMAO	| Global Modeling and Assimilation Office |
 | GMT	| Greenwich Mean Time |
 | GPP	| Gross Primary Production |
@@ -218,6 +235,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | MHz	| Megahertz |
 | MMR	| Monthly Management Review |
 | MOA	| Memorandum of Agreement |
+| MOD16 | MODIS Global evapotranspiration algorithm |
 | MODIS	| Moderate Resolution Imaging Spectroradiometer |
 | MOS	| Mission Operations System |
 | m/s	| Meters per second |
@@ -239,7 +257,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | PR	| Problem Report |
 | PSD	| Product Specifications Document |
 | PT-JPL	| Priestly-Taylor-JPL |
-| PT-JPL-SM | Priestly-Taylor-JPL-Soil Moisutre |
+| PT-JPL-SM | Priestly-Taylor-JPL-Soil Moisture |
 | QA	| Quality Assurance |
 | rad	| radians |
 | RDD	| Release Description Document |
@@ -253,6 +271,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | SITP	| System Integration and Test Plan |
 | SMP	| Software Management Plan |
 | SOM	| Software Operators Manual |
+| STIC | Surface Temperature Initiated Closure model | 
 | TAI	| International Atomic Clock |
 | Tb	| Brightness Temperature |
 | TBD	| To Be Determined |
@@ -264,3 +283,6 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | UTC	| Coordinated Universal Time |
 | V&V	| Verification and Validation |
 | XML	| Extensible Markup Language |
+
+*Table 4. Abbreviations and acronyms used in SBG-TIR documentation and products*
+
