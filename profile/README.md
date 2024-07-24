@@ -1,20 +1,37 @@
 # Surface Biology and Geology (SBG) OTTER Thermal Infrared Data Product Algorithms
 
-This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor.
+## Background
+This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor. 
 
-NASA's SBG mission was a Designated Observable (DO) identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. The Decadal Survey document presented a clear vision for the combined roles of visible to shortwave infrared imaging spectroscopy and multispectral or hyperspectral thermal infrared image data in addressing terrestrial and aquatic ecosystems and other elements of biodiversity, geology, natural hazards, the water cycle, and applied sciences topics relevant to many areas with societal benefits. 
+The SBG mission has been divided into two separate satellite platforms, supporting 1) visible shortwave infrared (VSWIR) collections, and 2) multispectral thermal (TIR) collections. The algorithms for the VSWIR component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization. 
 
-The SBG-TIR portion of the mission develops the TIR multispectral instrument. The SBG-TIR instrument measures the emitted radiance of the Earth surface and uses that information to better understand the dynamics of Earth's changing surface geology and biology, ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass. The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. Descriptions of partner products are covered in separate documents.
+The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. 
 
-| **Areas** | **Product** | **ShortName** | 
-| --- | --- | --- |
-| Fundamental (Level 1) | Radiance at Sensor | RAS |
+The OTTER instrument consists of six spectral and two mid infrared bands with 60-m resolution and ~3 day revisit. OTTER will measure the emitted radiance of the Earth surface to better understand the dynamics of Earth’s changing surface geology and biology, focusing on ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass; directly addressing the topics of interest identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. 
+
+
+| **Areas** | **Product** | **ShortName** | **NetCDF-4** | **GeoTIFF** | 
+| --- | --- | --- | --- | --- |
+| Fundamental (Level 1) | Radiance at Sensor | RAS | sw | X |  |
 | Fundamental | Surface Temperature and Emissivity | LSTE (incl WT, ST, and SGC) |
-| Fundamental | Cloud mask | CM |
-| Plant Functional Traits Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI |
+| Fundamental | Cloud mask<br> Water mask | CM<br> WM |
+| Ecosystems Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI |
 | Geology Suite | Surface Minerology (TIR only)<br> Elevated Technical Features<br> Volcanic Activity | SM<br> ETF<br> VA |
 | Snow Physics Suite | Snow Temperature (Use fundamental LST&E) | --- |
 | Aquatics Biology/Biogeochemistry Suite | Water Temperature (Use fundamental LST&E) | --- |
+*Table 1. SBG-TIR products*
+
+| **Band** | **Center Wavelength Position**  | **Spectral Width** |
+| --- | --- | --- | 
+| MIR-1 | 3.98 | 20 | 
+| MIR-2 | 4.8 | 150 | 
+| TIR-1 | 8.32 | 300 | 
+| TIR-2 | 8.63 | 300 | 
+| TIR-3 | 9.07 | 300 | 
+| TIR-4 | 10.30 | 300 | 
+| TIR-5 | 11.35 | 500 | 
+| TIR-6 | 12.05 | 500 | 
+*Table 2. SBG-TIR band center wavelength positions*
 
 ## SBG-TIR Data Product Algorithms
 
@@ -51,12 +68,46 @@ There are several supporting sub-components in generalized Julia packages, inclu
 - [HLS.jl](https://github.com/STARS-Data-Fusion/HLS.jl) for searching and downloading the Harmonized Landsat Sentinel (HLS) dataset
 - [VNP43NRT.jl](https://github.com/STARS-Data-Fusion/VNP43NRT.jl) for Bidirectional Reflectance Distribution Function (BRDF)
 
-## SBG-VSWIR
 
-The algorithms for the visible shortwave infrared (VSWIR) component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization.
+## Product File Name Format
 
+Product file names will have the form (TBD):
+<SBG_Name>_<PROD_TYPE>_<OOOOO>_<SSS>_<YYYYMMDD>T<hhmmss>_<BBbb>_<VV>.<TYPE>
 
-## Standard Metadata
+Where:
+SBG_Name: SBG-TIR name designation (TBD)
+PROD_TYPE:  L1A/L1B products; Example=L1B_RAD
+OOOOO:  Orbit number; starting at start of mission, ascending equatorial crossing
+SSS:  Scene ID; starting at first scene of each orbit
+YYYYMMDD:  Year, month, day of scene start time
+hhmmss:  Hour, minute, second of scene start time
+BBbb:  Build ID of software that generated product, Major+Minor (2+2 digits)
+VV:  Product version number (2 digits)
+TYPE:  File type extension=
+nc or tif for the data file
+nc.met or tif.met for the metadata file.
+
+## Data Product Format
+
+### Swath Standard Metadata (NetCDF-4)
+
+The Network Common Data Form 4 (NetCDF-4) format will be used to distribute SBG granules at the orbit/scene level. These product files have a .nc file extension and are internally organized using the NetCDF-4 data standard. The NetCDF-4 format is utilized here for long-term archiving, and is not recommended for end-user analysis. These NetCDF-4 files are compatible with NetCDF Viewer, Panoply, and the NetCDF4 package in Python.
+
+Each SBG swath product in NetCDF format will contain at least 3 groups of data:  A standard metadata group that specifies the same type of contents for all products, a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data, and the group(s) containing the product data.  
+
+### Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products 
+
+To provide an analysis-ready format, the SBG products are distributed in a tiled form and using the COG format. The tiled products include the letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling system used for SBG is borrowed from the modified Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles divide the Universal Transverse Mercator (UTM) zones into square tiles 109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830 columns in each tile, totaling 3.35 million pixels per tile. This allows the end user to assume that each 60 m SBG pixel will remain in the same location at each timestep observed in analysis. The COG format also facilitates end-user analysis as a universally recognized and supported format, compatible with open-source software, including QGIS, ArcGIS, GDAL, the Raster package in R, `rioxarray` in Python, and `Rasters.jl` in Julia.
+
+Each `float32` data layer occupies 4 bytes of storage per pixel, which amounts to an uncompressed size of 13.4 mb for each tiled data layer. The `uint8` quality flag layers occupy a single byte per pixel, which amounts to an uncompressed size of 3.35 mb per tiled data quality layer.
+
+Each `.tif` COG data layer in each L2T/L3T/L4T product additionally contains a rendered browse image in GeoJPEG format with a `.jpeg` extension. This image format is universally recognized and supported, and these files are compatible with Google Earth. Each L2T/L3T/L4T tile granule includes a `.json` file containing the Product Metadata and Standard Metadata in JSON format.
+
+#### Quality Flags
+
+Two high-level quality flags are provided in all gridded and tiled products as thematic/binary masks encoded to zero and one in unsigned 8-bit integer layers. The cloud layer represents the final cloud test from L2 CLOUD. The water layer represents the surface water body in the Shuttle Radar Topography Mission (SRTM) Digital Elevation Model. For both layers, zero means absence, and one means presence. Pixels with the value 1 in the cloud layer represent detection of cloud in that pixel. Pixels with the value 1 in the water layer represent open water surface in that pixel. All tiled product data layers written in `float32` contain a standard not-a-number (`NaN`) value at each pixel that could not be retrieved. The cloud and water layers are provided to explain these missing values.
+
+## Standard Metadata 
 
 | **Name** | **Type** | **Size** | **Example** |
 | --- | --- | --- | --- |
@@ -109,6 +160,9 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | StartOrbitNumber | String | variable | |
 | WestBoundingCoordinate | LongFloat | 8 | |
 
+*Table 3. Standard metadata included in SBG-TIR product files*
+
+
 ## Appendix of Abbreviations and Acronyms
 
 | **Abbreviatios** | **Description** |
@@ -117,6 +171,8 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | ARS	| Agricultural Research Service |
 | ASD	| Algorithm Specifications Document |
 | ATBD	| Algorithm Theoretical Basis Document |
+| BESS | Breathing Earth System Simulator |
+| C | Celsius |
 | CCB	| Change Control Board |
 | CDR	| Critical Design Review |
 | CF	| Climate and Forecast (metadata convention) |
@@ -124,6 +180,7 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | CONUS	| Continental United States |
 | COTS	| Commercial Off The Shelf |
 | DAAC	| Distributed Active Archive Center |
+| BOA | Bottom of Atmosphere
 | dB	| DeciBel |
 | DCN	| Document Change Notice |
 | deg	| Degrees |
@@ -135,7 +192,6 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | ECI	| Earth Centered Inertial coordinate system |
 | ECR	| Earth Centered Rotating coordinate system |
 | ECS	| EOSDIS Core System |
-| SBG	| ECOsystem Spaceborne Thermal Radiometer on Space Station |
 | EOS	| Earth Observing System |
 | EOSDIS	| EOS Data and Information System |
 | ESDIS	| Earth Science Data and Information System |
@@ -145,7 +201,7 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | GB	| gigabytes, 109 bytes |
 | GDS	| Ground Data System |
 | GHA	| Greenwich Hour Angle |
-| GHz	| Gigahertz, 109 hertz |
+| GHz	| $$\text{Gigahertz, 10}^9$$ hertz |
 | GMAO	| Global Modeling and Assimilation Office |
 | GMT	| Greenwich Mean Time |
 | GPP	| Gross Primary Production |
@@ -165,7 +221,7 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | JPL	| Jet Propulsion Laboratory |
 | K	| Kelvin |
 | KHz	| Kilohertz |
-| Km	| kilometer, 1000 meters |
+| Km	| Kilometer, 1000 meters |
 | L0 – L4	| Level 0 through Level 4 |
 | LAN	| Local Area Network |
 | LEO	| Low Earth Orbit |
@@ -173,16 +229,17 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | LOM	| Life of Mission |
 | LP	| Land Processes |
 | LSTE	| Land Surface Temperature and Emissivity |
-| m	| meter |
-| MB	| megabytes, 106 bytes |
+| m	| Meter |
+| MB	| Megabytes, 106 bytes |
 | Mbps	| Mega bits per second |
 | MHz	| Megahertz |
 | MMR	| Monthly Management Review |
 | MOA	| Memorandum of Agreement |
+| MOD16 | MODIS Global evapotranspiration algorithm |
 | MODIS	| Moderate Resolution Imaging Spectroradiometer |
 | MOS	| Mission Operations System |
-| m/s	| meters per second |
-| ms	| milliseconds |
+| m/s	| Meters per second |
+| ms	| Milliseconds |
 | MS	| Mission System |
 | NASA	| National Aeronautics and Space Administration  |
 | NCEP	| National Centers for Environmental Protection |
@@ -196,31 +253,36 @@ The algorithms for the visible shortwave infrared (VSWIR) component of the SBG m
 | ORR	| Operational Readiness Review |
 | ORT	| Operational Readiness Test |
 | PDR	| Preliminary Design Review |
-| percent	% | parts per hundred |
+| percent	% | Parts per hundred |
 | PR	| Problem Report |
 | PSD	| Product Specifications Document |
 | PT-JPL	| Priestly-Taylor-JPL |
-| PT-JPL-SM | Priestly-Taylor-JPL-Soil Moisutre |
+| PT-JPL-SM | Priestly-Taylor-JPL-Soil Moisture |
 | QA	| Quality Assurance |
 | rad	| radians |
 | RDD	| Release Description Document |
 | RFA	| Request For Action |
+| SBG	| ECOsystem Spaceborne Thermal Radiometer on Space Station |
 | S/C	| Spacecraft |
 | SCP	| Secure Copy |
 | SDP	| Software Development Plan |
 | SDS	| Science Data System |
-| sec, s	| seconds |
+| sec, s	| Seconds |
 | SITP	| System Integration and Test Plan |
 | SMP	| Software Management Plan |
 | SOM	| Software Operators Manual |
+| STIC | Surface Temperature Initiated Closure model | 
 | TAI	| International Atomic Clock |
 | Tb	| Brightness Temperature |
 | TBD	| To Be Determined |
 | TBS	| To Be Specified |
-| TOA	| Time of Arrival |
+| TOA	| Top of Atmosphere |
 | TPS	| Third Party Software |
 | USDA	| United State Department of Agriculture |
 | USGS	| United States Geological Society |
 | UTC	| Coordinated Universal Time |
 | V&V	| Verification and Validation |
 | XML	| Extensible Markup Language |
+
+*Table 4. Abbreviations and acronyms used in SBG-TIR documentation and products*
+
