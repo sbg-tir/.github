@@ -10,15 +10,16 @@ The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (
 The OTTER instrument consists of six spectral and two mid infrared bands with 60-m resolution and ~3 day revisit. OTTER will measure the emitted radiance of the Earth surface to better understand the dynamics of Earth’s changing surface geology and biology, focusing on ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass; directly addressing the topics of interest identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. 
 
 
-| **Areas** | **Product** | **ShortName** | **NetCDF-4** | **GeoTIFF** | 
-| --- | --- | --- | --- | --- |
-| Fundamental (Level 1) | Radiance at Sensor | RAS | sw | X |  |
+| **Areas** | **Product** | **ShortName** |
+| --- | --- | --- |
+| Fundamental (Level 1) | Radiance at Sensor | RAS | sw |
 | Fundamental | Surface Temperature and Emissivity | LSTE (incl WT, ST, and SGC) |
 | Fundamental | Cloud mask<br> Water mask | CM<br> WM |
 | Ecosystems Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI |
 | Geology Suite | Surface Minerology (TIR only)<br> Elevated Technical Features<br> Volcanic Activity | SM<br> ETF<br> VA |
 | Snow Physics Suite | Snow Temperature (Use fundamental LST&E) | --- |
 | Aquatics Biology/Biogeochemistry Suite | Water Temperature (Use fundamental LST&E) | --- |
+
 *Table 1. SBG-TIR products*
 
 | **Band** | **Center Wavelength Position**  | **Spectral Width** |
@@ -31,6 +32,7 @@ The OTTER instrument consists of six spectral and two mid infrared bands with 60
 | TIR-4 | 10.30 | 300 | 
 | TIR-5 | 11.35 | 500 | 
 | TIR-6 | 12.05 | 500 | 
+
 *Table 2. SBG-TIR band center wavelength positions*
 
 ## SBG-TIR Data Product Algorithms
