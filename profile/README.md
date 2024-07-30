@@ -111,6 +111,8 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 Information on Network Common Data Form (NetCDF-4) may be found at https://www.unidata.ucar.edu/software/netcdf/. 
 
 #### Cloud-Optimized GeoTIFF Orbit/Scene/Tile Format
+All SBG-TIR standard products are stored in the Geographic Tagged Image File Format (GeoTIFF). GeoTIFF is a general purpose file format and programming library for storing scientific data. The GeoTIFF format was originally created by Dr. Niles Ritter with the Open Geospatial Consortium publishing the OGC GeoTIFF standard, which defines the GeoTIFF by specifying requirements and encoding rules for using the Tagged Image File Format (TIFF) for the exchange of georeferenced or geocoded image data. The following sections provide some key elements of GeoTIFF that will be employed in SBG-TIR data products. 
+
 
 The tiled products include the letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling system used for SBG is borrowed from the modified Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles divide the Universal Transverse Mercator (UTM) zones into square tiles 109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830 columns in each tile, totaling 3.35 million pixels per tile. This allows the end user to assume that each 60 m SBG pixel will remain in the same location at each timestep observed in analysis. The COG format also facilitates end-user analysis as a universally recognized and supported format, compatible with open-source software, including QGIS, ArcGIS, GDAL, the Raster package in R, `rioxarray` in Python,and `Rasters.jl` in Julia.
 
@@ -119,6 +121,8 @@ Each `float32` data layer occupies 4 bytes of storage per pixel, which amounts t
 Each `.tif` COG data layer in each L2T/L3T/L4T product additionally contains a rendered browse image in GeoJPEG format with a `.jpeg` extension. This image format is universally recognized and supported, and these files are compatible with Google Earth. Each L2T/L3T/L4T tile granule includes a `.json` file containing the Product Metadata and Standard Metadata in JSON format.
 
 Each SBG tiled product in COG format will contain a standard metadata group that specifies the same type of contents for all products, and a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data.  
+
+Complete documentation of the GeoTIFF structure and application software can be found at https://www.ogc.org/standard/geotiff/.
 
 ### Quality Flags
 
