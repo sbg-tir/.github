@@ -22,18 +22,18 @@ The OTTER instrument consists of six spectral and two mid infrared bands with 60
 
 *Table 1. SBG-TIR products*
 
-| **Band** | **Center Wavelength Position**  | **Spectral Width** |
-| --- | --- | --- | 
-| MIR-1 | 3.98 | 20 | 
-| MIR-2 | 4.8 | 150 | 
-| TIR-1 | 8.32 | 300 | 
-| TIR-2 | 8.63 | 300 | 
-| TIR-3 | 9.07 | 300 | 
-| TIR-4 | 10.30 | 300 | 
-| TIR-5 | 11.35 | 500 | 
-| TIR-6 | 12.05 | 500 | 
+| **Band #** | **Center Wavelength (µm)** | **Spectral Width (FWHM) (nm)** | **Tolerance Center Wavelength (± nm)** | **Tolerance Spectral Width (±nm)** | **Knowledge Center Wavelength (±nm)** | **Knowledge Spectral Width (±nm)** | **Accuracy (K)** | **NEΔT (K)** | **Range (K)** |
+| --- | --- | --- | --- | --- | --- | --- | --- |--- | --- |
+| MIR-1 | 3.98 | 20 | 50 | 10 | 10 | 10 | ≤3@750 | ≤0.3@750 | 700-1200 |
+| MIR-2 | 4.8 | 150 | 100 | 50 | 20 | 20 | ≤1@450 | ≤0.2@450 | 400-800 |
+| TIR-1 | 8.32 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-2 | 8.63 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-3 | 9.07 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-4 | 10.30 | 300 | 50 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-5 | 11.35 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-6 | 12.05 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
 
-*Table 2. SBG-TIR band center wavelength positions*
+*Table 2: SBG final band positions and characteristics.*
 
 ## SBG-TIR Data Product Algorithms
 
