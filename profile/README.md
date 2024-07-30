@@ -274,6 +274,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 | ORT	| Operational Readiness Test |
 | PDR	| Preliminary Design Review |
 | percent	% | Parts per hundred |
+| PLRA | Program Level Requirements Appendix |
 | PR	| Problem Report |
 | PSD	| Product Specifications Document |
 | PT-JPL	| Priestly-Taylor-JPL |
