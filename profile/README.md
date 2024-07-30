@@ -1,39 +1,21 @@
 # Surface Biology and Geology (SBG) OTTER Thermal Infrared Data Product Algorithms
 
-## Background
+## Identification
 This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor. 
 
-The SBG mission has been divided into two separate satellite platforms, supporting 1) visible shortwave infrared (VSWIR) collections, and 2) multispectral thermal (TIR) collections. The algorithms for the VSWIR component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization. 
+This document will provide background information relevant to the SBG-TIR mission and data products. 
 
-The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. 
-
-The OTTER instrument consists of six spectral and two mid infrared bands with 60-m resolution and ~3 day revisit. OTTER will measure the emitted radiance of the Earth surface to better understand the dynamics of Earth’s changing surface geology and biology, focusing on ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass; directly addressing the topics of interest identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. 
-
-
-| **Areas** | **Product** | **ShortName** |
-| --- | --- | --- |
-| Fundamental (Level 1) | Radiance at Sensor | RAS | sw |
-| Fundamental | Surface Temperature and Emissivity | LSTE (incl WT, ST, and SGC) |
-| Fundamental | Cloud mask<br> Water mask | CM<br> WM |
-| Ecosystems Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI |
-| Geology Suite | Surface Minerology (TIR only)<br> Elevated Technical Features<br> Volcanic Activity | SM<br> ETF<br> VA |
-| Snow Physics Suite | Snow Temperature (Use fundamental LST&E) | --- |
-| Aquatics Biology/Biogeochemistry Suite | Water Temperature (Use fundamental LST&E) | --- |
+| **Areas** | **Product** | **ShortName** | **File Format** | 
+| --- | --- | --- | --- | 
+| Fundamental (Level 1) | Radiance and Brightness Temperature | RAS | sw | NetCDF-4 |
+| Fundamental | Surface Temperature and Emissivity | LSTE (incl WT, ST, and SGC) | COG |
+| Fundamental | Cloud mask<br> Water mask | CM<br> WM | NetCDF-4 |
+| Ecosystems Suite | Evapotranspiration<br> Water Use Efficiency<br> Evaporative Stress Index | ET<br> WUE<br> ESI | COG |
+| Geology Suite | Surface Minerology (TIR only)<br> Elevated Technical Features<br> Volcanic Activity | SM<br> ETF<br> VA | COG |
+| Snow Physics Suite | Snow Temperature (Use fundamental LST&E) | --- | COG |
+| Aquatics Biology/Biogeochemistry Suite | Water Temperature (Use fundamental LST&E) | --- | COG |
 
 *Table 1. SBG-TIR products*
-
-| **Band #** | **Center Wavelength (µm)** | **Spectral Width (FWHM) (nm)** | **Tolerance Center Wavelength (± nm)** | **Tolerance Spectral Width (±nm)** | **Knowledge Center Wavelength (±nm)** | **Knowledge Spectral Width (±nm)** | **Accuracy (K)** | **NEΔT (K)** | **Range (K)** |
-| --- | --- | --- | --- | --- | --- | --- | --- |--- | --- |
-| MIR-1 | 3.98 | 20 | 50 | 10 | 10 | 10 | ≤3@750 | ≤0.3@750 | 700-1200 |
-| MIR-2 | 4.8 | 150 | 100 | 50 | 20 | 20 | ≤1@450 | ≤0.2@450 | 400-800 |
-| TIR-1 | 8.32 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
-| TIR-2 | 8.63 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
-| TIR-3 | 9.07 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
-| TIR-4 | 10.30 | 300 | 50 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
-| TIR-5 | 11.35 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
-| TIR-6 | 12.05 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
-
-*Table 2: SBG final band positions and characteristics.*
 
 ## SBG-TIR Data Product Algorithms
 
@@ -70,8 +52,35 @@ There are several supporting sub-components in generalized Julia packages, inclu
 - [HLS.jl](https://github.com/STARS-Data-Fusion/HLS.jl) for searching and downloading the Harmonized Landsat Sentinel (HLS) dataset
 - [VNP43NRT.jl](https://github.com/STARS-Data-Fusion/VNP43NRT.jl) for Bidirectional Reflectance Distribution Function (BRDF)
 
+### Mission Background
 
-## Product File Name Format
+The SBG mission has been divided into two separate satellite platforms, supporting 1) visible shortwave infrared (VSWIR) collections, and 2) multispectral thermal (TIR) collections. The algorithms for the VSWIR component of the SBG mission are in the [sbg-vswir](https://github.com/sbg-vswir) organization. 
+
+The SGB-TIR mission is also a cooperative effort with the Italian Space Agency (Agenzia Spaziale Italiana; ASI), which provides SBG-TIR platform metadata and Visual and Near-Infrared (VNIR) products. 
+
+The OTTER instrument consists of six spectral and two mid infrared bands with 60-m resolution and ~3 day revisit. OTTER will measure the emitted radiance of the Earth surface to better understand the dynamics of Earth’s changing surface geology and biology, focusing on ground/water temperature, snow reflectivity, active geologic processes, vegetation traits, and algal biomass; directly addressing the topics of interest identified in the National Academies of Sciences, Engineering and Medicine (NASEM) 2017 Decadal Survey. 
+
+### Band characteristics
+
+The TIR instrument will acquire data from a sun-synchronous orbit of ~700 km with 60m spatial resolution in eight spectral bands with two of those located in the MIR and six in the TIR region of the electromagnetic spectrum between 3 and 13 µm. The center position and width of each band is provided in Table 2. The positions of the first three TIR bands closely match those of the ASTER sensor (ASTER bands 10 – 12), whereas the longest two TIR bands match those of the MODIS sensor (MODIS bands 31-32), which are typically used for “split-window” type temperature applications (REFS). The OTTER band centered at 10.3 µm detects surface mineralogy more accurately (e.g., distinguishing between silicate feldspars and quartz) as well as sulfate aerosols conversion in volcanic plumes. The two MIR bands are present to detect a larger range of high surface temperatures without saturating (e.g., 500 – 1200 K) as well as the potential of elevated CO2 emission sources using the 4.8 µm band.
+
+It is expected that small adjustments to the band positions, widths, and transmission will be made based on ongoing engineering filter performance capabilities and finalized once the filters are fabricated.
+
+
+| **Band #** | **Center Wavelength (µm)** | **Spectral Width (FWHM) (nm)** | **Tolerance Center Wavelength (± nm)** | **Tolerance Spectral Width (±nm)** | **Knowledge Center Wavelength (±nm)** | **Knowledge Spectral Width (±nm)** | **Accuracy (K)** | **NEΔT (K)** | **Range (K)** |
+| --- | --- | --- | --- | --- | --- | --- | --- |--- | --- |
+| MIR-1 | 3.98 | 20 | 50 | 10 | 10 | 10 | ≤3@750 | ≤0.3@750 | 700-1200 |
+| MIR-2 | 4.8 | 150 | 100 | 50 | 20 | 20 | ≤1@450 | ≤0.2@450 | 400-800 |
+| TIR-1 | 8.32 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-2 | 8.63 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-3 | 9.07 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-4 | 10.30 | 300 | 50 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-5 | 11.35 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+| TIR-6 | 12.05 | 300 | 100 | 50 | 20 | 20 | ≤0.5@275 | ≤0.2@275 | 200-500 |
+
+*Table 2: SBG final band positions and characteristics.*
+
+### Product File Name Format
 
 Product file names will have the form (TBD):
 <SBG_Name>_<PROD_TYPE>_<OOOOO>_<SSS>_<YYYYMMDD>T<hhmmss>_<BBbb>_<VV>.<TYPE>
@@ -89,27 +98,31 @@ TYPE:  File type extension=
 nc or tif for the data file
 nc.met or tif.met for the metadata file.
 
-## Data Product Format
+To provide an analysis-ready format, the SBG products are distributed in a tiled form and using the COG format:
 
-### Swath Standard Metadata (NetCDF-4)
+#### NetCDF-4 File Format
 
 The Network Common Data Form 4 (NetCDF-4) format will be used to distribute SBG granules at the orbit/scene level. These product files have a .nc file extension and are internally organized using the NetCDF-4 data standard. The NetCDF-4 format is utilized here for long-term archiving, and is not recommended for end-user analysis. These NetCDF-4 files are compatible with NetCDF Viewer, Panoply, and the NetCDF4 package in Python.
 
 Each SBG swath product in NetCDF format will contain at least 3 groups of data:  A standard metadata group that specifies the same type of contents for all products, a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data, and the group(s) containing the product data.  
 
-### Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products 
+Information on Network Common Data Form (NetCDF-4) may be found at https://www.unidata.ucar.edu/software/netcdf/. 
 
-To provide an analysis-ready format, the SBG products are distributed in a tiled form and using the COG format. The tiled products include the letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling system used for SBG is borrowed from the modified Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles divide the Universal Transverse Mercator (UTM) zones into square tiles 109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830 columns in each tile, totaling 3.35 million pixels per tile. This allows the end user to assume that each 60 m SBG pixel will remain in the same location at each timestep observed in analysis. The COG format also facilitates end-user analysis as a universally recognized and supported format, compatible with open-source software, including QGIS, ArcGIS, GDAL, the Raster package in R, `rioxarray` in Python, and `Rasters.jl` in Julia.
+#### Cloud-Optimized GeoTIFF Orbit/Scene/Tile Format
+
+ The tiled products include the letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling system used for SBG is borrowed from the modified Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles divide the Universal Transverse Mercator (UTM) zones into square tiles 109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830 columns in each tile, totaling 3.35 million pixels per tile. This allows the end user to assume that each 60 m SBG pixel will remain in the same location at each timestep observed in analysis. The COG format also facilitates end-user analysis as a universally recognized and supported format, compatible with open-source software, including QGIS, ArcGIS, GDAL, the Raster package in R, `rioxarray` in Python, and `Rasters.jl` in Julia.
 
 Each `float32` data layer occupies 4 bytes of storage per pixel, which amounts to an uncompressed size of 13.4 mb for each tiled data layer. The `uint8` quality flag layers occupy a single byte per pixel, which amounts to an uncompressed size of 3.35 mb per tiled data quality layer.
 
 Each `.tif` COG data layer in each L2T/L3T/L4T product additionally contains a rendered browse image in GeoJPEG format with a `.jpeg` extension. This image format is universally recognized and supported, and these files are compatible with Google Earth. Each L2T/L3T/L4T tile granule includes a `.json` file containing the Product Metadata and Standard Metadata in JSON format.
 
-#### Quality Flags
+Each SBG tiled product in COG format will contain a standard metadata group that specifies the same type of contents for all products, and a product specific metadata group that specifies those metadata elements that are useful for defining attributes of the product data.  
+
+### Quality Flags
 
 Two high-level quality flags are provided in all gridded and tiled products as thematic/binary masks encoded to zero and one in unsigned 8-bit integer layers. The cloud layer represents the final cloud test from L2 CLOUD. The water layer represents the surface water body in the Shuttle Radar Topography Mission (SRTM) Digital Elevation Model. For both layers, zero means absence, and one means presence. Pixels with the value 1 in the cloud layer represent detection of cloud in that pixel. Pixels with the value 1 in the water layer represent open water surface in that pixel. All tiled product data layers written in `float32` contain a standard not-a-number (`NaN`) value at each pixel that could not be retrieved. The cloud and water layers are provided to explain these missing values.
 
-## Standard Metadata 
+### Standard Metadata 
 
 | **Name** | **Type** | **Size** | **Example** |
 | --- | --- | --- | --- |
@@ -164,8 +177,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 
 *Table 3. Standard metadata included in SBG-TIR product files*
 
-
-## Appendix of Abbreviations and Acronyms
+### Appendix of Abbreviations and Acronyms
 
 | **Abbreviatios** | **Description** |
 | --- | --- |
