@@ -1,6 +1,7 @@
 # Surface Biology and Geology (SBG) OTTER Thermal Infrared Data Product Algorithms
 
 ## Identification
+
 This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor. 
 
 This document will provide background information relevant to the SBG-TIR mission and data products. 
@@ -111,8 +112,8 @@ Each SBG swath product in NetCDF format will contain at least 3 groups of data: 
 Information on Network Common Data Form (NetCDF-4) may be found at https://www.unidata.ucar.edu/software/netcdf/. 
 
 #### Cloud-Optimized GeoTIFF Orbit/Scene/Tile Format
-All SBG-TIR standard products are stored in the Geographic Tagged Image File Format (GeoTIFF). GeoTIFF is a general purpose file format and programming library for storing scientific data. The GeoTIFF format was originally created by Dr. Niles Ritter with the Open Geospatial Consortium publishing the OGC GeoTIFF standard, which defines the GeoTIFF by specifying requirements and encoding rules for using the Tagged Image File Format (TIFF) for the exchange of georeferenced or geocoded image data. The following sections provide some key elements of GeoTIFF that will be employed in SBG-TIR data products. 
 
+All SBG-TIR standard products are stored in the Geographic Tagged Image File Format (GeoTIFF). GeoTIFF is a general purpose file format and programming library for storing scientific data. The GeoTIFF format was originally created by Dr. Niles Ritter with the Open Geospatial Consortium publishing the OGC GeoTIFF standard, which defines the GeoTIFF by specifying requirements and encoding rules for using the Tagged Image File Format (TIFF) for the exchange of georeferenced or geocoded image data. The following sections provide some key elements of GeoTIFF that will be employed in SBG-TIR data products. 
 
 The tiled products include the letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling system used for SBG is borrowed from the modified Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles divide the Universal Transverse Mercator (UTM) zones into square tiles 109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830 columns in each tile, totaling 3.35 million pixels per tile. This allows the end user to assume that each 60 m SBG pixel will remain in the same location at each timestep observed in analysis. The COG format also facilitates end-user analysis as a universally recognized and supported format, compatible with open-source software, including QGIS, ArcGIS, GDAL, the Raster package in R, `rioxarray` in Python,and `Rasters.jl` in Julia.
 
@@ -132,7 +133,7 @@ Two high-level quality flags are provided in all gridded and tiled products as t
 
 | **Name** | **Type** | **Size** | **Example** |
 | --- | --- | --- | --- |
-| AncillaryInputPointer | String | variable | Group name of ancillary file list | 
+| AuxiliaryInputPointer | String | variable | Group name of ancillary file list | 
 | AutomaticQualityFlag | String | variable | PASS/FAIL (of product data) |
 | BuildId | String | variable | |
 | CollectionLabel | String | variable | |
