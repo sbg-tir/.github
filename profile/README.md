@@ -1,8 +1,8 @@
 # Surface Biology and Geology (SBG) OTTER Thermal Infrared Data Product Algorithms
 
-## Identification
-
 This organization contains the data product algorithms for the Surface Biology and Geology Thermal Infrared (SBG-TIR) Orbiting Terrestrial Thermal Emission Radiometer (OTTER) sensor. 
+
+The SBG-TIR OTTER data products are being developed based on the [ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (ECOSTRESS) collection 3 data products](https://github.com/ECOSTRESS-Collection-3).
 
 This document will provide background information relevant to the SBG-TIR mission and data products. 
 
