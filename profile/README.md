@@ -6,6 +6,10 @@ The SBG-TIR OTTER data products are being developed based on the [ECOsystem Spac
 
 This document will provide background information relevant to the SBG-TIR mission and data products. 
 
+## Acquisition Mask
+
+SBG-TIR will acquire data over land and coastal regions at 60 m spatial sampling (at nadir). To reduce data volumes, thermal data over the open ocean will be binned to 960 m (at nadir) on-board. VNIR data will not be acquired over open ocean. The following kmz and image file show which areas are within the high-resolution (60 m) acquisition mask: https://github.com/sbg-tir/Acquisition_mask 
+
 ## SBG-TIR Data Product Algorithms
 
 The SBG-TIR data product algorithms include:
